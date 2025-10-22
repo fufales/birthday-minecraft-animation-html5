@@ -396,6 +396,15 @@ document.addEventListener("DOMContentLoaded", () => {
         "#228b22",
         "#87ceeb",
         "#8b4513",
+        "#ffd700",
+        "#ff6b35",
+        "#9b59b6",
+        "#e74c3c",
+        "#f39c12",
+        "#1abc9c",
+        "#3498db",
+        "#e67e22",
+        "#95a5a6",
       ];
       this.animationId = null;
       this.lastTime = 0;
