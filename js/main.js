@@ -49,8 +49,23 @@ class MinecraftCharacter {
     // Create eyes
     const leftEye = document.createElement("div");
     leftEye.className = "char-eye left";
+    for (let i = 0; i < 4; i++) {
+      const pixel = document.createElement("div");
+      pixel.className = "eye-pixel";
+      leftEye.appendChild(pixel);
+    }
+
     const rightEye = document.createElement("div");
     rightEye.className = "char-eye right";
+    for (let i = 0; i < 4; i++) {
+      const pixel = document.createElement("div");
+      pixel.className = "eye-pixel";
+      rightEye.appendChild(pixel);
+    }
+
+    // Create mouth
+    const mouth = document.createElement("div");
+    mouth.className = "char-mouth";
 
     const body = document.createElement("div");
     body.className = "char-body";
@@ -77,6 +92,7 @@ class MinecraftCharacter {
     this.element.appendChild(head);
     head.appendChild(leftEye);
     head.appendChild(rightEye);
+    head.appendChild(mouth);
     this.element.appendChild(body);
     this.element.appendChild(armLeft);
     this.element.appendChild(armRight);
@@ -367,4 +383,73 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", () => {
     manager.render();
   });
+  // ===== CONFETTI ANIMATION =====
+  class ConfettiManager {
+    constructor() {
+      this.container = document.getElementById("confetti-container");
+      this.particles = [];
+      this.maxParticles = 50;
+      this.colors = [
+        "#7ec850",
+        "#4a90e2",
+        "#d2b48c",
+        "#228b22",
+        "#87ceeb",
+        "#8b4513",
+      ];
+      this.animationId = null;
+      this.lastTime = 0;
+    }
+
+    createParticle() {
+      const particle = document.createElement("div");
+      particle.className = "confetti";
+      particle.style.left = Math.random() * 100 + "vw";
+      particle.style.backgroundColor =
+        this.colors[Math.floor(Math.random() * this.colors.length)];
+      particle.style.animationDuration = Math.random() * 3 + 2 + "s";
+      particle.style.animationDelay = Math.random() * 2 + "s";
+      this.container.appendChild(particle);
+      this.particles.push(particle);
+
+      // Remove particle after animation
+      setTimeout(() => {
+        if (particle.parentNode) {
+          particle.parentNode.removeChild(particle);
+          this.particles = this.particles.filter((p) => p !== particle);
+        }
+      }, 5000);
+    }
+
+    update(deltaTime) {
+      this.lastTime += deltaTime;
+      if (this.lastTime >= 0.1 && this.particles.length < this.maxParticles) {
+        this.createParticle();
+        this.lastTime = 0;
+      }
+    }
+
+    start() {
+      this.animationId = requestAnimationFrame(this.animate.bind(this));
+    }
+
+    animate(currentTime) {
+      const deltaTime = (currentTime - this.lastTime) / 1000;
+      this.lastTime = currentTime;
+
+      this.update(deltaTime);
+      this.animationId = requestAnimationFrame(this.animate.bind(this));
+    }
+
+    stop() {
+      if (this.animationId) {
+        cancelAnimationFrame(this.animationId);
+        this.animationId = null;
+      }
+    }
+  }
+
+  // Initialize confetti
+  const confettiManager = new ConfettiManager();
+  confettiManager.start();
 });
