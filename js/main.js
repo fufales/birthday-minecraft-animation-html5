@@ -1,9 +1,10 @@
 // ===== CHARACTER CLASS =====
 class MinecraftCharacter {
-  constructor(name, colors, id, manager) {
+  constructor(name, colors, size, id, manager) {
     this.id = id;
     this.name = name;
     this.colors = colors;
+    this.size = size;
     this.manager = manager;
     this.position = {
       x: Math.random() * (window.innerWidth - 100),
@@ -28,7 +29,7 @@ class MinecraftCharacter {
   spawn(container) {
     // Create character element
     this.element = document.createElement("div");
-    this.element.className = "character walking";
+    this.element.className = `character walking ${this.size}`;
     this.element.dataset.id = this.id;
 
     // Add double-click event listener for removal
@@ -136,7 +137,8 @@ class MinecraftCharacter {
     this.position.x += this.velocity.x * deltaTime;
 
     // Boundary check
-    const charWidth = (window.innerHeight * 0.1) / 3;
+    const scale = this.size === "kid" ? 0.75 : 1;
+    const charWidth = ((window.innerHeight * 0.1) / 3) * scale;
     if (this.position.x < 0) {
       this.position.x = 0;
       this.velocity.x = Math.abs(this.velocity.x);
@@ -165,8 +167,13 @@ class MinecraftCharacter {
     // Calculate jump offset
     const jumpOffset = this.getJumpOffset();
 
-    // Apply position transform
-    let transform = `translate3d(${this.position.x}px, ${-jumpOffset}px, 0)`;
+    // Calculate scale for kid characters
+    const scale = this.size === "kid" ? 0.75 : 1;
+
+    // Apply position and scale transform
+    let transform = `translate3d(${
+      this.position.x
+    }px, ${-jumpOffset}px, 0) scale(${scale})`;
 
     // Flip character based on direction
     if (this.direction === "left") {
@@ -214,12 +221,18 @@ class CharacterManager {
     return this.characters.length < this.maxCharacters;
   }
 
-  spawn(name, colors) {
+  spawn(name, colors, size) {
     if (!this.canSpawn()) {
       return null;
     }
 
-    const character = new MinecraftCharacter(name, colors, this.nextId++, this);
+    const character = new MinecraftCharacter(
+      name,
+      colors,
+      size,
+      this.nextId++,
+      this
+    );
     character.spawn(this.container);
     this.characters.push(character);
     this.updateCounter();
@@ -267,6 +280,7 @@ class CharacterManager {
         id: char.id,
         name: char.name,
         colors: char.colors,
+        size: char.size,
       }));
       localStorage.setItem(this.storageKey, JSON.stringify(characterData));
     } catch (error) {
@@ -288,6 +302,7 @@ class CharacterManager {
           const character = new MinecraftCharacter(
             data.name,
             data.colors,
+            data.size || "adult",
             data.id,
             this
           );
@@ -363,13 +378,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const name = document.getElementById("char-name").value.trim();
+    const size = document.getElementById("char-size").value;
     const colors = {
       skin: document.getElementById("skin-color").value,
       shirt: document.getElementById("shirt-color").value,
       pants: document.getElementById("pants-color").value,
     };
 
-    manager.spawn(name, colors);
+    manager.spawn(name, colors, size);
 
     // Reset name field only
     document.getElementById("char-name").value = "";
