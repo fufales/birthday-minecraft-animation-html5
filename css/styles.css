@@ -61,7 +61,6 @@ body {
   background-image: url("../img/39960-minecraft-colour-105.webp");
   background-size: auto 100%;
   top: 72%;
-  overflow: hidden;
 }
 
 .dirt-layer {
@@ -648,6 +647,23 @@ body {
   color: #ffd700;
   font-size: 14px;
   margin-top: 8px;
+}
+
+/* ===== TREES ===== */
+.tree {
+  position: absolute;
+  height: 150%;
+  width: auto;
+  bottom: 90px;
+  z-index: 2;
+}
+
+.left-tree {
+  left: 10%;
+}
+
+.right-tree {
+  right: 10%;
 }
 
 /* ===== RESPONSIVE ADJUSTMENTS ===== */
