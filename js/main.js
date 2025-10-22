@@ -46,6 +46,12 @@ class MinecraftCharacter {
     head.className = "char-head";
     head.style.backgroundColor = this.colors.skin;
 
+    // Create eyes
+    const leftEye = document.createElement("div");
+    leftEye.className = "char-eye left";
+    const rightEye = document.createElement("div");
+    rightEye.className = "char-eye right";
+
     const body = document.createElement("div");
     body.className = "char-body";
     body.style.backgroundColor = this.colors.shirt;
@@ -69,6 +75,8 @@ class MinecraftCharacter {
     // Assemble character
     this.element.appendChild(nameLabel);
     this.element.appendChild(head);
+    head.appendChild(leftEye);
+    head.appendChild(rightEye);
     this.element.appendChild(body);
     this.element.appendChild(armLeft);
     this.element.appendChild(armRight);
