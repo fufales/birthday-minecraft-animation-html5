@@ -270,7 +270,9 @@ class CharacterManager {
     const button = document.querySelector("#spawn-form button");
     if (button) {
       button.disabled = !this.canSpawn();
-      button.textContent = this.canSpawn() ? "Add Character" : "Max Characters";
+      button.textContent = this.canSpawn()
+        ? "Agregar Personaje"
+        : "Máx. Personajes";
     }
   }
 
@@ -373,7 +375,7 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     if (!manager.canSpawn()) {
-      alert("Maximum characters reached (15)!");
+      alert("¡Máximo de personajes alcanzado (15)!");
       return;
     }
 

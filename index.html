@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Minecraft Character Simulator</title>
+    <title>Simulador de Personajes de Minecraft</title>
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
@@ -13,12 +13,14 @@
       <div class="sky-layer">
         <!-- Birthday Title -->
         <h1 id="birthday-title">
-          Feliz Cumple
+          <small>Llegaste al nivel 6</small>
+
           <br /><img
             src="img/8f236e42-026a-42d9-85cd-7a39612b4799.png"
             alt="Wilson"
             style="max-width: 27vw"
           />
+          <br />Feliz Cumple
         </h1>
         <!-- Clouds -->
         <div class="cloud cloud-1"></div>
@@ -39,38 +41,38 @@
 
     <!-- Control Panel -->
     <div id="control-panel">
-      <h2>Spawn Character</h2>
+      <h2>Crear Personaje</h2>
       <form id="spawn-form">
         <label>
-          Name:
+          Nombre:
           <input
             type="text"
             id="char-name"
-            placeholder="Enter name"
+            placeholder="Ingresa nombre"
             required
             maxlength="20"
           />
         </label>
         <label>
-          Size:
+          Tamaño:
           <select id="char-size">
-            <option value="adult">Adult</option>
-            <option value="kid">Kid</option>
+            <option value="adult">Adulto</option>
+            <option value="kid">Niño</option>
           </select>
         </label>
         <label>
-          Skin Tone:
+          Tono de Piel:
           <input type="color" id="skin-color" value="#FFD9A0" />
         </label>
         <label>
-          T-Shirt Color:
+          Color de Camiseta:
           <input type="color" id="shirt-color" value="#3498db" />
         </label>
         <label>
-          Pants Color:
+          Color de Pantalones:
           <input type="color" id="pants-color" value="#2c3e50" />
         </label>
-        <button type="submit">Add Character</button>
+        <button type="submit">Agregar Personaje</button>
         <p class="counter"><span id="char-count">0</span>/15</p>
       </form>
     </div>
