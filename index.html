@@ -624,6 +624,7 @@
           this.maxCharacters = 15;
           this.nextId = 1;
           this.container = document.getElementById("characters-container");
+          this.storageKey = "minecraft-characters";
         }
 
         canSpawn() {
@@ -639,6 +640,7 @@
           character.spawn(this.container);
           this.characters.push(character);
           this.updateCounter();
+          this.saveCharacters();
 
           return character;
         }
@@ -664,6 +666,55 @@
             button.textContent = this.canSpawn()
               ? "Add Character"
               : "Max Characters";
+          }
+        }
+
+        saveCharacters() {
+          try {
+            const characterData = this.characters.map((char) => ({
+              id: char.id,
+              name: char.name,
+              colors: char.colors,
+            }));
+            localStorage.setItem(
+              this.storageKey,
+              JSON.stringify(characterData)
+            );
+          } catch (error) {
+            console.warn("Failed to save characters to localStorage:", error);
+          }
+        }
+
+        loadCharacters() {
+          try {
+            const storedData = localStorage.getItem(this.storageKey);
+            if (!storedData) return;
+
+            const characterData = JSON.parse(storedData);
+            if (!Array.isArray(characterData)) return;
+
+            // Spawn each saved character
+            characterData.forEach((data) => {
+              if (data.id && data.name && data.colors) {
+                const character = new MinecraftCharacter(
+                  data.name,
+                  data.colors,
+                  data.id
+                );
+                character.spawn(this.container);
+                this.characters.push(character);
+              }
+            });
+
+            // Update nextId to avoid conflicts
+            if (this.characters.length > 0) {
+              this.nextId =
+                Math.max(...this.characters.map((char) => char.id)) + 1;
+            }
+
+            this.updateCounter();
+          } catch (error) {
+            console.warn("Failed to load characters from localStorage:", error);
           }
         }
       }
@@ -708,6 +759,9 @@
       document.addEventListener("DOMContentLoaded", () => {
         const manager = new CharacterManager();
         const gameLoop = new GameLoop(manager);
+
+        // Load saved characters from localStorage
+        manager.loadCharacters();
 
         // Form submission handler
         const form = document.getElementById("spawn-form");
