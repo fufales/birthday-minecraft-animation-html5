@@ -161,6 +161,7 @@
         bottom: calc(20vh);
         will-change: transform;
         transition: none;
+        pointer-events: auto;
       }
 
       /* ===== CHARACTER PARTS ===== */
@@ -445,10 +446,11 @@
     <script>
       // ===== CHARACTER CLASS =====
       class MinecraftCharacter {
-        constructor(name, colors, id) {
+        constructor(name, colors, id, manager) {
           this.id = id;
           this.name = name;
           this.colors = colors;
+          this.manager = manager;
           this.position = {
             x: Math.random() * (window.innerWidth - 100),
             y: 0,
@@ -474,6 +476,11 @@
           this.element = document.createElement("div");
           this.element.className = "character walking";
           this.element.dataset.id = this.id;
+
+          // Add double-click event listener for removal
+          this.element.addEventListener("dblclick", () => {
+            this.manager.remove(this.id);
+          });
 
           // Create name label
           const nameLabel = document.createElement("div");
@@ -636,7 +643,12 @@
             return null;
           }
 
-          const character = new MinecraftCharacter(name, colors, this.nextId++);
+          const character = new MinecraftCharacter(
+            name,
+            colors,
+            this.nextId++,
+            this
+          );
           character.spawn(this.container);
           this.characters.push(character);
           this.updateCounter();
@@ -651,6 +663,17 @@
 
         render() {
           this.characters.forEach((char) => char.render());
+        }
+
+        remove(id) {
+          const index = this.characters.findIndex((char) => char.id === id);
+          if (index !== -1) {
+            const character = this.characters[index];
+            character.destroy();
+            this.characters.splice(index, 1);
+            this.updateCounter();
+            this.saveCharacters();
+          }
         }
 
         updateCounter() {
@@ -699,7 +722,8 @@
                 const character = new MinecraftCharacter(
                   data.name,
                   data.colors,
-                  data.id
+                  data.id,
+                  this
                 );
                 character.spawn(this.container);
                 this.characters.push(character);
