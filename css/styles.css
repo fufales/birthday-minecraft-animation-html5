@@ -44,7 +44,7 @@ body {
 .sky-layer {
   position: absolute;
   width: 100%;
-  height: 50%;
+  height: 72%;
   background: linear-gradient(
     to bottom,
     var(--sky-color-top),
@@ -57,68 +57,21 @@ body {
 .grass-layer {
   position: absolute;
   width: 100%;
-  height: 30%;
-  background: var(--grass-color);
-  top: 50%;
+  height: 15%;
+  background-image: url("../img/39960-minecraft-colour-105.webp");
+  background-size: auto 100%;
+  top: 72%;
   overflow: hidden;
-}
-
-.grass-layer::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(
-      0deg,
-      transparent 24%,
-      rgba(106, 168, 79, 0.3) 25%,
-      rgba(106, 168, 79, 0.3) 26%,
-      transparent 27%,
-      transparent 74%,
-      rgba(106, 168, 79, 0.3) 75%,
-      rgba(106, 168, 79, 0.3) 76%,
-      transparent 77%,
-      transparent
-    ),
-    linear-gradient(
-      90deg,
-      transparent 24%,
-      rgba(106, 168, 79, 0.3) 25%,
-      rgba(106, 168, 79, 0.3) 26%,
-      transparent 27%,
-      transparent 74%,
-      rgba(106, 168, 79, 0.3) 75%,
-      rgba(106, 168, 79, 0.3) 76%,
-      transparent 77%,
-      transparent
-    );
-  background-size: 50px 50px;
 }
 
 .dirt-layer {
   position: absolute;
   width: 100%;
   height: 20%;
-  background: var(--dirt-color);
+  background-image: url("../img/15399869-abccfdffcdeddbf_xl.webp");
+  background-size: auto 100%;
   top: 80%;
   overflow: hidden;
-}
-
-.dirt-layer::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: radial-gradient(
-      circle at 20% 20%,
-      rgba(0, 0, 0, 0.2) 2px,
-      transparent 2px
-    ),
-    radial-gradient(circle at 60% 40%, rgba(0, 0, 0, 0.2) 2px, transparent 2px),
-    radial-gradient(circle at 40% 70%, rgba(0, 0, 0, 0.2) 2px, transparent 2px),
-    radial-gradient(circle at 80% 60%, rgba(0, 0, 0, 0.2) 2px, transparent 2px),
-    radial-gradient(circle at 15% 85%, rgba(0, 0, 0, 0.2) 2px, transparent 2px);
-  background-size: 40px 40px;
 }
 
 /* ===== CLOUDS ===== */
@@ -361,7 +314,7 @@ body {
   position: absolute;
   width: calc(var(--char-unit) * 4);
   height: calc(var(--char-unit) * 12);
-  bottom: calc(20vh);
+  bottom: calc(24vh);
   will-change: transform;
   transition: none;
   pointer-events: auto;
