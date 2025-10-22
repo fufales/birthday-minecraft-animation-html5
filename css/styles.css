@@ -1,0 +1,878 @@
+/* ===== FONT INTEGRATION ===== */
+@font-face {
+  font-family: "Minecrafter";
+  src: url("fonts/minecrafter/subset-Minecrafter.woff2") format("woff2"),
+    url("fonts/minecrafter/subset-Minecrafter.woff") format("woff"),
+    url("fonts/minecrafter/subset-Minecrafter.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ===== RESET & BASE STYLES ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Minecrafter", "Courier New", monospace;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ===== CSS VARIABLES ===== */
+:root {
+  --char-unit: calc(10vh / 12);
+  --sky-color-top: #87ceeb;
+  --sky-color-bottom: #4a90e2;
+  --grass-color: #7ec850;
+  --dirt-color: #8b4513;
+}
+
+/* ===== WORLD CONTAINER ===== */
+#world {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ===== BACKGROUND LAYERS ===== */
+.sky-layer {
+  position: absolute;
+  width: 100%;
+  height: 72%;
+  background: linear-gradient(
+    to bottom,
+    var(--sky-color-top),
+    var(--sky-color-bottom)
+  );
+  top: 0;
+  overflow: hidden;
+}
+
+.grass-layer {
+  position: absolute;
+  width: 100%;
+  height: 15%;
+  background-image: url("../img/39960-minecraft-colour-105.webp");
+  background-size: auto 100%;
+  top: 72%;
+}
+
+.dirt-layer {
+  position: absolute;
+  width: 100%;
+  height: 20%;
+  background-image: url("../img/15399869-abccfdffcdeddbf_xl.webp");
+  background-size: auto 100%;
+  top: 80%;
+  overflow: hidden;
+}
+
+/* ===== CLOUDS ===== */
+.cloud {
+  position: absolute;
+  background: #ffffff;
+  border: 2px solid #e6e6e6;
+  box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.1),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.3), 2px 2px 4px rgba(0, 0, 0, 0.1);
+  opacity: 0.8;
+  z-index: 1;
+}
+
+.cloud::before {
+  content: "";
+  position: absolute;
+  background: #f8f8f8;
+  border: 2px solid #e6e6e6;
+  box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0.05),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.2), 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: #ffffff;
+  border: 2px solid #e6e6e6;
+  box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0.05),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.2), 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Cloud 1 - Large cloud */
+.cloud-1 {
+  width: 120px;
+  height: 40px;
+  top: 15%;
+  left: -120px;
+  border-radius: 0;
+}
+
+.cloud-1::before {
+  width: 60px;
+  height: 30px;
+  top: -15px;
+  left: 20px;
+  border-radius: 0;
+}
+
+.cloud-1::after {
+  width: 40px;
+  height: 25px;
+  top: -10px;
+  left: 70px;
+  border-radius: 0;
+}
+
+/* Cloud 2 - Medium cloud */
+.cloud-2 {
+  width: 80px;
+  height: 30px;
+  top: 25%;
+  left: -80px;
+  border-radius: 0;
+}
+
+.cloud-2::before {
+  width: 40px;
+  height: 20px;
+  top: -10px;
+  left: 15px;
+  border-radius: 0;
+}
+
+.cloud-2::after {
+  width: 30px;
+  height: 18px;
+  top: -8px;
+  left: 45px;
+  border-radius: 0;
+}
+
+/* Cloud 3 - Small cloud */
+.cloud-3 {
+  width: 60px;
+  height: 25px;
+  top: 35%;
+  left: -60px;
+  border-radius: 0;
+}
+
+.cloud-3::before {
+  width: 30px;
+  height: 15px;
+  top: -8px;
+  left: 10px;
+  border-radius: 0;
+}
+
+.cloud-3::after {
+  width: 20px;
+  height: 12px;
+  top: -5px;
+  left: 35px;
+  border-radius: 0;
+}
+
+/* Cloud 4 - Large cloud (different position) */
+.cloud-4 {
+  width: 100px;
+  height: 35px;
+  top: 10%;
+  left: -100px;
+  border-radius: 0;
+}
+
+.cloud-4::before {
+  width: 50px;
+  height: 25px;
+  top: -12px;
+  left: 18px;
+  border-radius: 0;
+}
+
+.cloud-4::after {
+  width: 35px;
+  height: 20px;
+  top: -8px;
+  left: 55px;
+  border-radius: 0;
+}
+
+/* Cloud 5 - Medium cloud (different position) */
+.cloud-5 {
+  width: 70px;
+  height: 28px;
+  top: 40%;
+  left: -70px;
+  border-radius: 0;
+}
+
+.cloud-5::before {
+  width: 35px;
+  height: 18px;
+  top: -9px;
+  left: 12px;
+  border-radius: 0;
+}
+
+.cloud-5::after {
+  width: 25px;
+  height: 15px;
+  top: -6px;
+  left: 40px;
+  border-radius: 0;
+}
+
+/* Cloud animations */
+@keyframes drift-1 {
+  0% {
+    transform: translateX(-120px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 120px));
+  }
+}
+
+@keyframes drift-2 {
+  0% {
+    transform: translateX(-80px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 80px));
+  }
+}
+
+@keyframes drift-3 {
+  0% {
+    transform: translateX(-60px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 60px));
+  }
+}
+
+@keyframes drift-4 {
+  0% {
+    transform: translateX(-100px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 100px));
+  }
+}
+
+@keyframes drift-5 {
+  0% {
+    transform: translateX(-70px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 70px));
+  }
+}
+
+.cloud-1 {
+  animation: drift-1 120s linear infinite;
+}
+
+.cloud-2 {
+  animation: drift-2 90s linear infinite;
+  animation-delay: -15s;
+}
+
+.cloud-3 {
+  animation: drift-3 75s linear infinite;
+  animation-delay: -30s;
+}
+
+.cloud-4 {
+  animation: drift-4 105s linear infinite;
+  animation-delay: -45s;
+}
+
+.cloud-5 {
+  animation: drift-5 85s linear infinite;
+  animation-delay: -60s;
+}
+/* ===== SUN ===== */
+.sun {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  left: 10%;
+  top: 20%;
+  background: linear-gradient(45deg, #ffd700, #ffa500, #ff8c00);
+  border: 3px solid #000;
+  box-shadow: inset -3px -3px 6px rgba(0, 0, 0, 0.3),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.2), 3px 3px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  animation: sun-float 5s ease-in-out infinite;
+}
+
+/* Grid pattern for pixelated look */
+.sun::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+@keyframes sun-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* ===== CHARACTERS CONTAINER ===== */
+#characters-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ===== CHARACTER BASE STYLES ===== */
+.character {
+  position: absolute;
+  width: calc(var(--char-unit) * 4);
+  height: calc(var(--char-unit) * 12);
+  bottom: calc(24vh);
+  will-change: transform;
+  transition: none;
+  pointer-events: auto;
+}
+
+/* ===== CHARACTER PARTS ===== */
+.char-head {
+  width: calc(var(--char-unit) * 3);
+  height: calc(var(--char-unit) * 3);
+  position: absolute;
+  top: 0;
+  left: calc(var(--char-unit) * 0.5);
+  border: 2px solid #000;
+  box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.3),
+    2px 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.char-eye {
+  width: calc(var(--char-unit) * 0.4);
+  height: calc(var(--char-unit) * 0.4);
+  position: absolute;
+  top: calc(var(--char-unit) * 0.8);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0;
+}
+
+.char-eye.left {
+  left: calc(var(--char-unit) * 0.6);
+}
+
+.char-eye.right {
+  right: calc(var(--char-unit) * 0.6);
+}
+
+.eye-pixel {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  box-sizing: border-box;
+}
+
+.char-mouth {
+  width: calc(var(--char-unit) * 0.6);
+  height: calc(var(--char-unit) * 0.1);
+  background-color: #000;
+  position: absolute;
+  bottom: calc(var(--char-unit) * 0.3);
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0;
+}
+
+.char-body {
+  width: calc(var(--char-unit) * 4);
+  height: calc(var(--char-unit) * 6);
+  position: absolute;
+  top: calc(var(--char-unit) * 3);
+  border: 2px solid #000;
+  box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.3),
+    2px 2px 4px rgba(0, 0, 0, 0.2);
+  background-image: linear-gradient(
+      90deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.1) 20%,
+      rgba(255, 255, 255, 0.1) 40%,
+      transparent 40%,
+      transparent 60%,
+      rgba(255, 255, 255, 0.1) 60%,
+      rgba(255, 255, 255, 0.1) 80%,
+      transparent 80%
+    ),
+    linear-gradient(
+      0deg,
+      transparent 25%,
+      rgba(0, 0, 0, 0.1) 25%,
+      rgba(0, 0, 0, 0.1) 50%,
+      transparent 50%,
+      transparent 75%,
+      rgba(0, 0, 0, 0.1) 75%,
+      rgba(0, 0, 0, 0.1) 100%
+    );
+  background-size: 50% 33.33%;
+}
+
+.char-arm {
+  width: calc(var(--char-unit) * 1);
+  height: calc(var(--char-unit) * 5);
+  position: absolute;
+  top: calc(var(--char-unit) * 3);
+  border: 2px solid #000;
+  transform-origin: top center;
+  box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0.3),
+    1px 1px 2px rgba(0, 0, 0, 0.2);
+  background-image: linear-gradient(
+      90deg,
+      transparent 33%,
+      rgba(255, 255, 255, 0.1) 33%,
+      rgba(255, 255, 255, 0.1) 66%,
+      transparent 66%
+    ),
+    linear-gradient(
+      0deg,
+      transparent 25%,
+      rgba(0, 0, 0, 0.1) 25%,
+      rgba(0, 0, 0, 0.1) 50%,
+      transparent 50%,
+      transparent 75%,
+      rgba(0, 0, 0, 0.1) 75%
+    );
+  background-size: 100% 20%;
+}
+
+.char-arm.left {
+  left: calc(var(--char-unit) * -1);
+}
+
+.char-arm.right {
+  right: calc(var(--char-unit) * -1);
+}
+
+.char-leg {
+  width: calc(var(--char-unit) * 1.5);
+  height: calc(var(--char-unit) * 5);
+  position: absolute;
+  top: calc(var(--char-unit) * 9);
+  border: 2px solid #000;
+  transform-origin: top center;
+  box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0.3),
+    1px 1px 2px rgba(0, 0, 0, 0.2);
+  background-image: linear-gradient(
+      90deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.1) 25%,
+      rgba(255, 255, 255, 0.1) 75%,
+      transparent 75%
+    ),
+    linear-gradient(
+      0deg,
+      transparent 20%,
+      rgba(0, 0, 0, 0.1) 20%,
+      rgba(0, 0, 0, 0.1) 40%,
+      transparent 40%,
+      transparent 60%,
+      rgba(0, 0, 0, 0.1) 60%,
+      rgba(0, 0, 0, 0.1) 80%,
+      transparent 80%
+    );
+  background-size: 100% 25%;
+}
+
+.char-leg.left {
+  left: calc(var(--char-unit) * 0.5);
+}
+
+.char-leg.right {
+  right: calc(var(--char-unit) * 0.5);
+}
+
+/* ===== NAME LABELS ===== */
+.name-label {
+  position: absolute;
+  top: calc(var(--char-unit) * -6);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 20px;
+  white-space: nowrap;
+  pointer-events: none;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Kid character adjustments */
+.character.kid .name-label {
+  top: calc(var(--char-unit) * -8);
+  font-size: 20px;
+  padding: 4px 8px;
+}
+
+/* ===== WALKING ANIMATIONS ===== */
+@keyframes walk-left-arm {
+  0%,
+  100% {
+    transform: rotate(-25deg);
+  }
+  50% {
+    transform: rotate(25deg);
+  }
+}
+
+@keyframes walk-right-arm {
+  0%,
+  100% {
+    transform: rotate(25deg);
+  }
+  50% {
+    transform: rotate(-25deg);
+  }
+}
+
+@keyframes walk-left-leg {
+  0%,
+  100% {
+    transform: rotate(25deg);
+  }
+  50% {
+    transform: rotate(-25deg);
+  }
+}
+
+@keyframes walk-right-leg {
+  0%,
+  100% {
+    transform: rotate(-25deg);
+  }
+  50% {
+    transform: rotate(25deg);
+  }
+}
+
+.character.walking .char-arm.left {
+  animation: walk-left-arm 0.6s infinite ease-in-out;
+}
+
+.character.walking .char-arm.right {
+  animation: walk-right-arm 0.6s infinite ease-in-out;
+}
+
+.character.walking .char-leg.left {
+  animation: walk-left-leg 0.6s infinite ease-in-out;
+}
+
+.character.walking .char-leg.right {
+  animation: walk-right-leg 0.6s infinite ease-in-out;
+}
+
+/* ===== CONTROL PANEL ===== */
+#control-panel {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.85);
+  border: 4px solid #000;
+  border-image: linear-gradient(
+      45deg,
+      #444 25%,
+      transparent 25%,
+      transparent 75%,
+      #444 75%,
+      #444
+    )
+    4;
+  border-radius: 0;
+  padding: 20px;
+  min-width: 280px;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+#control-panel h2 {
+  color: #ffd700;
+  font-size: 18px;
+  margin-bottom: 15px;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+#spawn-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#spawn-form label {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-size: 12px;
+  gap: 4px;
+}
+
+#spawn-form input[type="text"] {
+  padding: 8px;
+  border: 3px solid #000;
+  border-image: linear-gradient(
+      45deg,
+      #444 25%,
+      transparent 25%,
+      transparent 75%,
+      #444 75%,
+      #444
+    )
+    3;
+  background: #222;
+  color: #fff;
+  font-family: "Minecrafter", "Courier New", monospace;
+  font-size: 12px;
+  border-radius: 0;
+}
+
+#spawn-form input[type="color"] {
+  height: 40px;
+  width: 100%;
+  border: 3px solid #000;
+  border-image: linear-gradient(
+      45deg,
+      #444 25%,
+      transparent 25%,
+      transparent 75%,
+      #444 75%,
+      #444
+    )
+    3;
+  background: #222;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+#spawn-form select {
+  width: 100%;
+  padding: 8px;
+  border: 3px solid #000;
+  border-image: linear-gradient(
+      45deg,
+      #444 25%,
+      transparent 25%,
+      transparent 75%,
+      #444 75%,
+      #444
+    )
+    3;
+  background: #222;
+  color: #fff;
+  font-family: "Minecrafter", "Courier New", monospace;
+  font-size: 12px;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+#spawn-form button {
+  padding: 12px;
+  background: #4caf50;
+  color: white;
+  border: 3px solid #000;
+  border-image: linear-gradient(
+      45deg,
+      #2e7d32 25%,
+      transparent 25%,
+      transparent 75%,
+      #2e7d32 75%,
+      #2e7d32
+    )
+    3;
+  border-radius: 0;
+  font-family: "Minecrafter", "Courier New", monospace;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 8px;
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5);
+}
+
+#spawn-form button:hover:not(:disabled) {
+  background: #45a049;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5);
+}
+
+#spawn-form button:disabled {
+  background: #666;
+  cursor: not-allowed;
+}
+
+.counter {
+  text-align: center;
+  color: #ffd700;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* ===== TREES ===== */
+.tree {
+  position: absolute;
+  height: 180%;
+  width: auto;
+  bottom: 90px;
+  z-index: 2;
+}
+
+.left-tree {
+  left: 10%;
+}
+
+.right-tree {
+  right: 10%;
+}
+
+/* ===== BIRTHDAY TITLE ===== */
+#birthday-title {
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Minecrafter", "Courier New", monospace;
+  font-size: 3.5rem;
+  font-weight: normal;
+  color: #ffffff;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8), 4px 4px 0px rgba(0, 0, 0, 0.4),
+    6px 6px 0px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to bottom, #87ceeb 0%, #ffffff 50%, #87ceeb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  z-index: 5;
+  pointer-events: none;
+  animation: float 3s ease-in-out infinite;
+  white-space: nowrap;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(0px);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-10px);
+  }
+}
+
+/* ===== CONFETTI ANIMATION ===== */
+#confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.confetti {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #7ec850;
+  animation: fall linear infinite;
+  will-change: transform;
+}
+
+.confetti:nth-child(2n) {
+  background-color: #4a90e2;
+}
+
+.confetti:nth-child(3n) {
+  background-color: #d2b48c;
+}
+
+.confetti:nth-child(4n) {
+  background-color: #228b22;
+}
+
+.confetti:nth-child(5n) {
+  background-color: #87ceeb;
+}
+
+.confetti:nth-child(6n) {
+  background-color: #8b4513;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* ===== LEVEL TEXT STYLING ===== */
+#birthday-title .level-text {
+  color: #ffcb0d !important;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8), 4px 4px 0px rgba(0, 0, 0, 0.4) !important;
+  font-weight: bold !important;
+  /* Override the webkit background clip from parent */
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+  background-clip: initial !important;
+  background: none !important;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 768px) {
+  #birthday-title {
+    font-size: 2.5rem;
+  }
+
+  #control-panel {
+    top: 10px;
+    right: 10px;
+    min-width: 240px;
+    padding: 15px;
+  }
+
+  #control-panel h2 {
+    font-size: 14px;
+  }
+
+  #spawn-form label {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  #birthday-title {
+    font-size: 2rem;
+  }
+}
