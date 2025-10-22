@@ -837,6 +837,18 @@ body {
   }
 }
 
+/* ===== LEVEL TEXT STYLING ===== */
+#birthday-title .level-text {
+  color: #ffcb0d !important;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8), 4px 4px 0px rgba(0, 0, 0, 0.4) !important;
+  font-weight: bold !important;
+  /* Override the webkit background clip from parent */
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+  background-clip: initial !important;
+  background: none !important;
+}
+
 /* ===== RESPONSIVE ADJUSTMENTS ===== */
 @media (max-width: 768px) {
   #birthday-title {
