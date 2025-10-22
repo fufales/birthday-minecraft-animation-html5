@@ -673,7 +673,7 @@ body {
 /* ===== TREES ===== */
 .tree {
   position: absolute;
-  height: 150%;
+  height: 180%;
   width: auto;
   bottom: 90px;
   z-index: 2;
