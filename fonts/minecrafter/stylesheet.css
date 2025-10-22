@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Minecrafter';
+    src: url('subset-Minecrafter.woff2') format('woff2'),
+        url('subset-Minecrafter.woff') format('woff'),
+        url('subset-Minecrafter.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Minecrafter Alt';
+    src: url('subset-MinecrafterAlt.woff2') format('woff2'),
+        url('subset-MinecrafterAlt.woff') format('woff'),
+        url('subset-MinecrafterAlt.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
